@@ -28,5 +28,7 @@ def nonDupString():
 
     return output
 
+#Test: 
+#For input AABBCCD, output should be AB and length should be 2 in this case: 
 print(nonDupString())
 
