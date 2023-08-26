@@ -17,7 +17,6 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "url": "http://localhost:8080",
             "skipFiles": [
                 "<node_internals>/**"
             ],
