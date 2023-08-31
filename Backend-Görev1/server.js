@@ -1,4 +1,5 @@
 require('dotenv').config();
+const okulSistemiRoutes = require('./routes/OkulSistemi.js');
 
 //Express
 const express = require('express');
@@ -6,21 +7,29 @@ const app = express();
 
 //Port
 const port = 8080;
-
-//MongoDB
+// MongoDB
 const mongoose = require('mongoose');
-//Connect to MongoDB
-mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true});
-const db = mongoose.connection;
-//Error handling
-db.on('error', console.error.bind(console, 'connection error:'));
-//Database connection success
-db.once('open', () => console.log('Connected to MongoDB'));
+
+async function connectToDatabase() {
+    try {
+        await mongoose.connect(process.env.DATABASE_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log('Connected to MongoDB');
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error.message);
+    }
+}
+
+connectToDatabase();
+
 
 app.use(express.json());
 
 //Routes
-const okulSistemiRouter = require('./routes/OkulSistemi'); // localhost:8080/OkulSistemi
+app.use('/OkulSistemi', okulSistemiRoutes);
 
-//Middleware
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+module.exports = app;

@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const  OgrenciSchema = new mongoose.Schema({
+    id: {
+        type: Number,
+        required: true
+    },
     isim: {
         type: String,
         required: true
@@ -9,10 +13,11 @@ const  OgrenciSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    //dersler: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Ders' }]
     ders: {
-        type: Number,
-        required: true
-    }
+        type: String,
+        required: true,
+        ref: 'Ders'}
 });
 
 module.exports = mongoose.model('Ogrenci', OgrenciSchema);

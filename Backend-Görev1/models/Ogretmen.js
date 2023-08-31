@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 
 const  OgretmenSchema = new mongoose.Schema({
+    id: {
+        type: Number,
+        required: true
+    },
+
     isim: { 
         type: String,
         required: true
@@ -11,9 +16,11 @@ const  OgretmenSchema = new mongoose.Schema({
     },
 
     ders: {
-        type: Number,
-        required: true
+        type: String,
+        required: true,
+        ref: 'Ders'
     }
 });
+
 
 module.exports = mongoose.model('Ogretmen', OgretmenSchema);
